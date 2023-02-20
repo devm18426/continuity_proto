@@ -11,7 +11,7 @@ from continuity.dns.compact_edns0_owner_option import CompactEDNS0OwnerOption
 from continuity.dns.dns_options import DNSOptions
 from continuity.dns.dns_string import DNSString
 from continuity.dns.outgoing import MyDNSOutgoing
-from net.continuity_proto.discovery_test_data import rpAD, rpHN, rpBA
+from continuity.discovery_test_data import rpAD, rpHN, rpBA
 
 
 # https://stackoverflow.com/a/28950776/1124853
