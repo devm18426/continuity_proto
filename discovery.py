@@ -7,10 +7,10 @@ import psutil
 from zeroconf import Zeroconf, ServiceInfo, const, DNSText, current_time_millis, \
     DNSAddress, DNSNsec
 
-from net.continuity_proto.dns.compact_edns0_owner_option import CompactEDNS0OwnerOption
-from net.continuity_proto.dns.dns_options import DNSOptions
-from net.continuity_proto.dns.dns_string import DNSString
-from net.continuity_proto.dns.outgoing import MyDNSOutgoing
+from continuity.dns.compact_edns0_owner_option import CompactEDNS0OwnerOption
+from continuity.dns.dns_options import DNSOptions
+from continuity.dns.dns_string import DNSString
+from continuity.dns.outgoing import MyDNSOutgoing
 
 
 # https://stackoverflow.com/a/28950776/1124853
