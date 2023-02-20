@@ -11,6 +11,7 @@ from continuity.dns.compact_edns0_owner_option import CompactEDNS0OwnerOption
 from continuity.dns.dns_options import DNSOptions
 from continuity.dns.dns_string import DNSString
 from continuity.dns.outgoing import MyDNSOutgoing
+from net.continuity_proto.discovery_test_data import rpAD, rpHN, rpBA
 
 
 # https://stackoverflow.com/a/28950776/1124853
@@ -92,10 +93,10 @@ if __name__ == "__main__":
         const._CLASS_IN,
         ttl,
         text=bytes(
-            DNSString("rpBA=[MAC]") +
-            "rpAD=[MAC-no-colons]" +
+            DNSString(f"rpBA={rpBA}") +
+            f"rpAD={rpAD}" +
             "rpFl=0x20000" +
-            "rpHN=[MAC-no-colons]" +
+            f"rpHN={rpHN}" +
             "rpMac=0" +
             "rpVr=230.1"
         ),
@@ -106,8 +107,10 @@ if __name__ == "__main__":
 
     address_record = DNSAddress(f"{hostname}.{domain}", const._TYPE_A, const._CLASS_IN, ttl, ip.packed)
 
-    service_nsec_record = DNSNsec(fqdn, const._TYPE_NSEC, const._CLASS_IN, ttl, fqdn, rdtypes=[const._TYPE_TXT, const._TYPE_SRV], created=now)
-    host_nsec_record = DNSNsec(f"{hostname}.{domain}", const._TYPE_NSEC, const._CLASS_IN, 120, fqdn, rdtypes=[const._TYPE_A], created=now)
+    service_nsec_record = DNSNsec(fqdn, const._TYPE_NSEC, const._CLASS_IN, ttl, fqdn,
+                                  rdtypes=[const._TYPE_TXT, const._TYPE_SRV], created=now)
+    host_nsec_record = DNSNsec(f"{hostname}.{domain}", const._TYPE_NSEC, const._CLASS_IN, 120, fqdn,
+                               rdtypes=[const._TYPE_A], created=now)
 
     owner_option = CompactEDNS0OwnerOption(primary_mac=mac)
     options_record = DNSOptions(const._CLASS_IN, ttl, owner_option.serialize(), now)
